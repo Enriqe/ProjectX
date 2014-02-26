@@ -122,7 +122,7 @@ public class ProjectX extends JFrame implements Runnable, KeyListener
 		
 		addKeyListener(this);
 		sonido = new SoundClip("elephant.wav");
-        rat = new SoundClip("mice.wav");
+                rat = new SoundClip("mice.wav");
 	 	musica = new SoundClip("elephant_greeting.wav");
 	 	bomb = new SoundClip("Explosion.wav");
 		gameover = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("gameover.jpg"));	
