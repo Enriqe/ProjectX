@@ -89,40 +89,14 @@ import java.awt.event.MouseMotionListener;
                 pausa = false; // iniciliza la pausa como false
                 desaparece = false;
 
+                //int posrX = (int) (Math.random() * (getWidth()));    
+                int posrY = (int) (Math.random() * (getHeight()));
+                velocidad = (int) (Math.random()*3)+3;
+                popo = new Proyectil(pajaro.getPosX(),pajaro.getPosY(), velocidad);
+                popo.setPosX(popo.getPosX() + pajaro.getAncho());
+                popo.setPosY(popo.getPosY() + (pajaro.getAlto()/2));
                 
-                //crea una lista con los numeros 6,10 o 12
-                listaNum = new ArrayList<>();
-                listaNum.add(6);
-                listaNum.add(10);
-                listaNum.add(12);
-                listaNum.add(6);
-                listaNum.add(10);
-                listaNum.add(12);
-                Collections.shuffle(listaNum); //revuelve la lista
-                
-                numProyectils = listaNum.get(0);// saca un numero random de la lista
-                int mitadProyectils = numProyectils/2;
-
-
-                for (int i = 0; i < mitadProyectils; i++){ // primera mitad de los malos aparecen por la parte izq
-                    //int posrX = (int) (Math.random() * (getWidth()));    
-                    int posrY = (int) (Math.random() * (getHeight()));
-                    velocidad = (int) (Math.random()*3)+3;
-                    popo = new Proyectil(-2,posrY, velocidad);
-                    popo.setPosX(popo.getPosX() - popo.getAncho());
-                    popo.setPosY(popo.getPosY() - popo.getAlto());
-                    lista.add(popo);
-                }
-                
-                for (int i = mitadProyectils; i < numProyectils; i++){ /// segunda mitad de los malos aparecen por parte der
-                    //int posrX = (int) (Math.random() * (getWidth()));    
-                    int posrY = (int) (Math.random() * (getHeight()));
-                    velocidad = (int) -((Math.random()*3)+3);
-                    popo = new Proyectil(getWidth()+3,posrY, velocidad);
-                    popo.setPosX(popo.getPosX() - popo.getAncho());
-                    popo.setPosY(popo.getPosY() - popo.getAlto());
-                    lista.add(popo);
-                }
+                    
 		//Pinta el fondo del Applet de color amarillo		
 		setBackground(Color.white);
 		addKeyListener(this);
