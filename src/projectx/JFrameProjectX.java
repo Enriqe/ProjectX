@@ -172,17 +172,6 @@ import java.awt.event.MouseMotionListener;
 	public void actualiza() {
             
                 switch(direccion){
-                   case 1: {
-                           carro.setPosY(carro.getPosY() - 2);
-                           //carro.setPosX(carro.getPosX() + 5);
-                           break;    //se mueve hacia arriba derecha
-                   }
-                   case 2: {
-                           carro.setPosX(carro.getPosX() + 2);
-                           //carro.setPosY(carro.getPosY() + 5);
-                           
-                           break;    //se mueve hacia abajo derecha	
-                   }
                    case 3: {
                            carro.setPosX(carro.getPosX() - 2);
                            //carro.setPosY(carro.getPosY() + 5);
@@ -190,7 +179,7 @@ import java.awt.event.MouseMotionListener;
                    }
                    case 4: {
                            //carro.setPosX(carro.getPosX() - 5);
-                           carro.setPosY(carro.getPosY() + 2);
+                           carro.setPosX(carro.getPosX() + 2);
                            break;    //se mueve hacia arriba izquierda	
                    }
                }
@@ -222,10 +211,10 @@ import java.awt.event.MouseMotionListener;
 	public void checaColision() {
                 //Colision del bueno con el Applet 
 		if (carro.getPosX() + carro.getAncho() > getWidth()) {
-			carro.setPosX(carro.getPosX()-5);
+			carro.setPosX(carro.getPosX()-10);
 		}
-		if (carro.getPosX() < 0) {
-			carro.setPosX(carro.getPosX()+5);
+		if (carro.getPosX() < getWidth()/2) {
+			carro.setPosX(getWidth()/2);
 		}
 
 		//Colision entre objetos
