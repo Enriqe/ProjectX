@@ -20,7 +20,7 @@ public class Proyectil extends Base {
 		super(posX,posY); //constructor
                 velocidad = vel;
                 //Se cargan las imágenes(cuadros) para la animación del malo
-		Image malo1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenesProyectil/birdPoop.gif"));
+		Image malo1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("birdPoop/birdPoop.gif"));
                 
                 //Se crea la animación
 		animVamp = new Animacion();

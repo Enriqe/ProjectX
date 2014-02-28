@@ -24,7 +24,7 @@ import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.net.URL;
+//import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ArrayList;
@@ -60,12 +60,12 @@ import java.awt.event.MouseMotionListener;
         int numProyectils;
  	
  	public JFrameProjectX(){
+ 		//setSize(500, 500);
  		setTitle("BEST GAME EVER");
  		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
- 		//setSize(500, 500);
                 //Carga los clips de sonido
-		explosion = new SoundClip("sonidos/Explosion.wav");
-		beep = new SoundClip("sonidos/beep-07.wav");
+		//explosion = new SoundClip("sonidos/Explosion.wav");
+		//beep = new SoundClip("sonidos/beep-07.wav");
                 init();
                 start();
  	}
@@ -253,7 +253,7 @@ import java.awt.event.MouseMotionListener;
                     //Colision entre objetos
                     if( babe.intersecta(vampiro)) {
                             colisiono=true;
-                            beep.play();
+                            //beep.play();
                             desaparece = true;
                             score++;
                             vampiro.setConteo(vampiro.getConteo()+1);
@@ -286,7 +286,7 @@ import java.awt.event.MouseMotionListener;
                                     int posrY = (int) (Math.random() * (getHeight()));
                                     vampiro.setPosY(posrY);
                                     vampiro.setPosX(getWidth()+10);
-                                    explosion.play();
+                                    //explosion.play();
                             }
                     }
                     else{
@@ -294,7 +294,7 @@ import java.awt.event.MouseMotionListener;
                                 int posrY = (int) (Math.random() * (getHeight()));
                                 vampiro.setPosX(-5);
                                 vampiro.setPosY(posrY);
-                                explosion.play();
+                                //explosion.play();
                         }
                     }
                 }

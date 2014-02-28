@@ -34,8 +34,7 @@ public class Canasta extends Base{
 		Image bueno2 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("car/1.gif"));
 		Image bueno3 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("car/2.gif"));
 		Image bueno4 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("car/3.gif"));
-		Image bueno5 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("car/4.gif"));
-		Image bueno6 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("car/5.gif"));                  
+		Image bueno5 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("car/4.gif"));                  
                 
                 //for (int i = 0; i < 10; i++)
                   //  animBabe.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenesCanasta/" + i + ".gif")), 100);
