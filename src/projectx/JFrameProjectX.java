@@ -47,8 +47,8 @@ import java.awt.event.MouseMotionListener;
 	private int direccion;    // Direccion del elefante
 	private Image dbImage;	// Imagen a proyectar	
 	private Graphics dbg;	// Objeto grafico
-	private Canasta babe;    // Objeto de la clase Canasta
-	private Proyectil vampiro;    //Objeto de la clase Proyectil
+	private Canasta carro;    // Objeto de la clase Canasta
+	private Proyectil popo;    //Objeto de la clase Proyectil
         private LinkedList<Proyectil> lista; // lista para guardar los monitos malos
         private int velocidad;
         boolean pausa;
@@ -60,7 +60,6 @@ import java.awt.event.MouseMotionListener;
         int numProyectils;
  	
  	public JFrameProjectX(){
- 		//setSize(500, 500);
  		setTitle("BEST GAME EVER");
  		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 //Carga los clips de sonido
@@ -78,7 +77,7 @@ import java.awt.event.MouseMotionListener;
 		direccion = 0;
 		int posX = (int) (getWidth() / 2);    // posicion en x en medio de la applet
 		int posY = (int) (getHeight() /2);    // posicion en y enmedio de la applet
-		babe = new Canasta(posX,posY);
+		carro = new Canasta(posX,posY);
 		setBackground (Color.yellow);
                 lista = new LinkedList<Proyectil>();  //lista encadenada para guardar malos
                 pausa = false; // iniciliza la pausa como false
@@ -103,20 +102,20 @@ import java.awt.event.MouseMotionListener;
                     //int posrX = (int) (Math.random() * (getWidth()));    
                     int posrY = (int) (Math.random() * (getHeight()));
                     velocidad = (int) (Math.random()*3)+3;
-                    vampiro = new Proyectil(-2,posrY, velocidad);
-                    vampiro.setPosX(vampiro.getPosX() - vampiro.getAncho());
-                    vampiro.setPosY(vampiro.getPosY() - vampiro.getAlto());
-                    lista.add(vampiro);
+                    popo = new Proyectil(-2,posrY, velocidad);
+                    popo.setPosX(popo.getPosX() - popo.getAncho());
+                    popo.setPosY(popo.getPosY() - popo.getAlto());
+                    lista.add(popo);
                 }
                 
                 for (int i = mitadProyectils; i < numProyectils; i++){ /// segunda mitad de los malos aparecen por parte der
                     //int posrX = (int) (Math.random() * (getWidth()));    
                     int posrY = (int) (Math.random() * (getHeight()));
                     velocidad = (int) -((Math.random()*3)+3);
-                    vampiro = new Proyectil(getWidth()+3,posrY, velocidad);
-                    vampiro.setPosX(vampiro.getPosX() - vampiro.getAncho());
-                    vampiro.setPosY(vampiro.getPosY() - vampiro.getAlto());
-                    lista.add(vampiro);
+                    popo = new Proyectil(getWidth()+3,posrY, velocidad);
+                    popo.setPosX(popo.getPosX() - popo.getAncho());
+                    popo.setPosY(popo.getPosY() - popo.getAlto());
+                    lista.add(popo);
                 }
 		//Pinta el fondo del Applet de color amarillo		
 		setBackground(Color.white);
@@ -187,37 +186,37 @@ import java.awt.event.MouseMotionListener;
 	}
         
         /**
-	 * Metodo usado para actualizar la posicion de objetos elefante y vampiro.
+	 * Metodo usado para actualizar la posicion de objetos elefante y popo.
 	 * 
 	 */
 	public void actualiza() {
             
                 switch(direccion){
                    case 1: {
-                           babe.setPosY(babe.getPosY() - 2);
-                           //babe.setPosX(babe.getPosX() + 5);
+                           carro.setPosY(carro.getPosY() - 2);
+                           //carro.setPosX(carro.getPosX() + 5);
                            break;    //se mueve hacia arriba derecha
                    }
                    case 2: {
-                           babe.setPosX(babe.getPosX() + 2);
-                           //babe.setPosY(babe.getPosY() + 5);
+                           carro.setPosX(carro.getPosX() + 2);
+                           //carro.setPosY(carro.getPosY() + 5);
                            
                            break;    //se mueve hacia abajo derecha	
                    }
                    case 3: {
-                           babe.setPosX(babe.getPosX() - 2);
-                           //babe.setPosY(babe.getPosY() + 5);
+                           carro.setPosX(carro.getPosX() - 2);
+                           //carro.setPosY(carro.getPosY() + 5);
                            break;    //se mueve hacia abajo izquierda
                    }
                    case 4: {
-                           //babe.setPosX(babe.getPosX() - 5);
-                           babe.setPosY(babe.getPosY() + 2);
+                           //carro.setPosX(carro.getPosX() - 5);
+                           carro.setPosY(carro.getPosY() + 2);
                            break;    //se mueve hacia arriba izquierda	
                    }
                }
 
-               for (Proyectil vampiro : lista) {
-                   vampiro.setPosX(vampiro.getPosX() + vampiro.getVelocidad());
+               for (Proyectil popo : lista) {
+                   popo.setPosX(popo.getPosX() + popo.getVelocidad());
                }
 
 
@@ -228,44 +227,44 @@ import java.awt.event.MouseMotionListener;
                //Guarda el tiempo actual
                tiempoActual += tiempoTranscurrido;
                //Actualiza la animación en base al tiempo transcurrido
-               babe.animBabe.actualiza(tiempoTranscurrido);
-               for (Proyectil vampiro : lista) {
-                   vampiro.animVamp.actualiza(tiempoTranscurrido);
+               carro.animBabe.actualiza(tiempoTranscurrido);
+               for (Proyectil popo : lista) {
+                   popo.animVamp.actualiza(tiempoTranscurrido);
                }
             
 	}
         
         /**
-	 * Metodo usado para checar las colisiones del objeto elefante y vampiro
+	 * Metodo usado para checar las colisiones del objeto elefante y popo
 	 * con las orillas del <code>Applet</code>.
 	 */
 	public void checaColision() {
                 //Colision del bueno con el Applet 
-		if (babe.getPosX() + babe.getAncho() > getWidth()) {
-			babe.setPosX(babe.getPosX()-5);
+		if (carro.getPosX() + carro.getAncho() > getWidth()) {
+			carro.setPosX(carro.getPosX()-5);
 		}
-		if (babe.getPosX() < 0) {
-			babe.setPosX(babe.getPosX()+5);
+		if (carro.getPosX() < 0) {
+			carro.setPosX(carro.getPosX()+5);
 		}
 
 		//Colision entre objetos
-                for (Proyectil vampiro : lista) {
+                for (Proyectil popo : lista) {
                     //Colision entre objetos
-                    if( babe.intersecta(vampiro)) {
+                    if( carro.intersecta(popo)) {
                             colisiono=true;
                             //beep.play();
                             desaparece = true;
                             score++;
-                            vampiro.setConteo(vampiro.getConteo()+1);
-                            if(vampiro.getVelocidad() < 0){
+                            popo.setConteo(popo.getConteo()+1);
+                            if(popo.getVelocidad() < 0){
                                     int posrY = (int) (Math.random() * (getHeight()));
-                                    vampiro.setPosX(getWidth()+2);
-                                    vampiro.setPosY(posrY);
+                                    popo.setPosX(getWidth()+2);
+                                    popo.setPosY(posrY);
                             }
                             else{
                                     int posrY = (int) (Math.random() * (getHeight()));
-                                    vampiro.setPosX(-2);
-                                    vampiro.setPosY(posrY);
+                                    popo.setPosX(-2);
+                                    popo.setPosY(posrY);
                             }
                             
                     }
@@ -280,20 +279,20 @@ import java.awt.event.MouseMotionListener;
                 }
                 
                 //colision entre paredes
-                for (Proyectil vampiro : lista) {
-                    if(vampiro.getVelocidad()<0){
-                            if (vampiro.getPosX() + vampiro.getAncho() < -125 ) {
+                for (Proyectil popo : lista) {
+                    if(popo.getVelocidad()<0){
+                            if (popo.getPosX() + popo.getAncho() < -125 ) {
                                     int posrY = (int) (Math.random() * (getHeight()));
-                                    vampiro.setPosY(posrY);
-                                    vampiro.setPosX(getWidth()+10);
+                                    popo.setPosY(posrY);
+                                    popo.setPosX(getWidth()+10);
                                     //explosion.play();
                             }
                     }
                     else{
-                        if ((vampiro.getPosX() + vampiro.getAncho()) > getWidth()+30) {
+                        if ((popo.getPosX() + popo.getAncho()) > getWidth()+30) {
                                 int posrY = (int) (Math.random() * (getHeight()));
-                                vampiro.setPosX(-5);
-                                vampiro.setPosY(posrY);
+                                popo.setPosX(-5);
+                                popo.setPosY(posrY);
                                 //explosion.play();
                         }
                     }
@@ -411,21 +410,21 @@ import java.awt.event.MouseMotionListener;
 	 */
 	public void paint1(Graphics g) {
             
-		if (babe != null && vampiro != null) {
-                        g.drawImage(babe.getImagen(), babe.getPosX(), babe.getPosY(), this);
-			g.drawImage(vampiro.getImagen(), vampiro.getPosX(),
-                                    vampiro.getPosY(), this);
-                        //pinta los vampiros en la lista
-                        for (Proyectil vampiro : lista) {
-                            g.drawImage(vampiro.getImagen(), vampiro.getPosX(), vampiro.getPosY(), this);
+		if (carro != null && popo != null) {
+                        g.drawImage(carro.getImagen(), carro.getPosX(), carro.getPosY(), this);
+			g.drawImage(popo.getImagen(), popo.getPosX(),
+                                    popo.getPosY(), this);
+                        //pinta los popos en la lista
+                        for (Proyectil popo : lista) {
+                            g.drawImage(popo.getImagen(), popo.getPosX(), popo.getPosY(), this);
                         }
-                        //score = vampiro.getConteo();
-                        g.drawString("SCORE: " + vampiro.getConteo(), 20, 40);
+                        //score = popo.getConteo();
+                        g.drawString("SCORE: " + popo.getConteo(), 20, 40);
                         if(pausa){
-                            g.drawString(""+babe.getPausa(),babe.getPosX()+babe.getAncho(), babe.getPosY());
+                            g.drawString(""+carro.getPausa(),carro.getPosX()+carro.getAncho(), carro.getPosY());
                         }
                         if(desaparece && colisiono && tiempoColision<=30 && !pausa){
-                            g.drawString(""+babe.getDesaparece(),babe.getPosX()+babe.getAncho(), babe.getPosY());
+                            g.drawString(""+carro.getDesaparece(),carro.getPosX()+carro.getAncho(), carro.getPosY());
                         }
 			
 		} else {
