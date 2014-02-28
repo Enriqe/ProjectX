@@ -71,13 +71,13 @@ import java.awt.event.MouseMotionListener;
  	}
         
         public void init() {
-                setSize(500, 500);
+                setSize(900, 700);
                 score = 0;
                 colisiono = false;
                 tiempoColision = 0;
 		direccion = 0;
-		int posX = (int) (getWidth() / 2);    // posicion en x en medio de la applet
-		int posY = (int) (getHeight() /2);    // posicion en y enmedio de la applet
+		int posX = (int) (getWidth()/2 -30);    // posicion en x del carro en medio del JFrame
+		int posY = (int) (getHeight() - 60);    // posicion en y del carro
 		carro = new Canasta(posX,posY);
 		int posPajaroX = (int) (getWidth() / 8);    // posicion en x en medio de la applet
 		int posPajaroY = (int) (getHeight() / 2);    // posicion en y enmedio de la applet
@@ -370,11 +370,8 @@ import java.awt.event.MouseMotionListener;
 	 * @param e es el <code>evento</code> generado al presionar las teclas.
 	 */
         public void keyPressed(KeyEvent e) {
-                    if (e.getKeyCode() == KeyEvent.VK_UP) {    //Presiono flecha arriba
-                            direccion = 1;
-                    } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {    //Presiono flecha abajo
-                            direccion = 2;
-                    } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {    //Presiono flecha izquierda
+
+                    if (e.getKeyCode() == KeyEvent.VK_LEFT) {    //Presiono flecha izquierda
                             direccion = 3;
                     } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {    //Presiono flecha derecha
                             direccion = 4;
