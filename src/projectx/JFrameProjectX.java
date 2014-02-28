@@ -32,6 +32,15 @@ import java.util.Collections;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.Vector;
+import javax.swing.JOptionPane;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 //
 
  public class JFrameProjectX extends JFrame implements Runnable, KeyListener, MouseListener, MouseMotionListener
@@ -57,8 +66,12 @@ import java.awt.event.MouseMotionListener;
         private SoundClip explosion;	//Sonido de explosion
 	private SoundClip beep;	//Sonido de beep
         int score;
+        int vidas;
         private List<Integer> listaNum;
         int numProyectils;
+        private Vector vec;    // Objeto vector para agregar el puntaje.
+        private String nombreArchivo;    //Nombre del archivo.
+        private String[] arr;    //Arreglo del archivo divido.
  	
  	public JFrameProjectX(){
  		setTitle("BEST GAME EVER");
@@ -73,6 +86,9 @@ import java.awt.event.MouseMotionListener;
         public void init() {
                 setSize(900, 700);
                 score = 0;
+                vidas = 0;
+                nombreArchivo = "Puntaje.txt";
+                vec = new Vector();
                 colisiono = false;
                 tiempoColision = 0;
 		direccion = 0;
@@ -148,21 +164,38 @@ import java.awt.event.MouseMotionListener;
      */
 	public void run () {
             	//Guarda el tiempo actual del sistema
-                tiempoActual = System.currentTimeMillis();
-		while (true) {
-                        if(!pausa){
-                            actualiza();
-                            checaColision();
+                while(vidas>0){
+                        tiempoActual = System.currentTimeMillis();
+                        while (true) {
+                                if(!pausa){
+                                    actualiza();
+                                    checaColision();
+                                }
+                                repaint();    // Se actualiza el <code>Applet</code> repintando el contenido.
+                                try	{
+                                        // El thread se duerme.
+                                        Thread.sleep (20);
+                                }
+                                catch (InterruptedException ex)	{
+                                        System.out.println("Error en " + ex.toString());
+                                }
                         }
-			repaint();    // Se actualiza el <code>Applet</code> repintando el contenido.
-			try	{
-				// El thread se duerme.
-				Thread.sleep (20);
-			}
-			catch (InterruptedException ex)	{
-				System.out.println("Error en " + ex.toString());
-			}
-		}
+                }
+                String nombre = JOptionPane.showInputDialog("Cual es tu nombre?");
+                JOptionPane.showMessageDialog(null, 
+                              "El puntaje de " + nombre + " es: " + score, "PUNTAJE", 
+                              JOptionPane.PLAIN_MESSAGE);
+                try {
+
+                      leeArchivo();    //lee el contenido del archivo
+                      //Agrega el contenido del nuevo puntaje al vector.
+                      vec.add(new Puntaje(nombre,score));
+                      //Graba el vector en el archivo.
+                      grabaArchivo();
+                } catch(IOException ex) {
+
+                      System.out.println("Error en " + ex.toString());
+                }
 	}
         
         /**
@@ -197,7 +230,7 @@ import java.awt.event.MouseMotionListener;
                tiempoActual += tiempoTranscurrido;
                //Actualiza la animación en base al tiempo transcurrido
                if(direccion!= 0) {
-                    carro.animBabe.actualiza(tiempoTranscurrido);
+                    carro.animBabe.actualiza(tiempoTranscurrido);  //cuando el carro no se mueve, no se anima
                }
                pajaro.animBabe.actualiza(tiempoTranscurrido);
                for (Proyectil popo : lista) {
@@ -403,6 +436,48 @@ import java.awt.event.MouseMotionListener;
 		}
 		
 	}
- 	 	
+        
+                /**
+         * Metodo que lee a informacion de un archivo y lo agrega a un vector.
+         *
+         * @throws IOException
+         */
+        public void leeArchivo() throws IOException{
+            BufferedReader fileIn;
+            try{
+                    fileIn = new BufferedReader(new FileReader(nombreArchivo));
+            } catch (FileNotFoundException e){
+                    File puntos = new File(nombreArchivo);
+                    PrintWriter fileOut = new PrintWriter(puntos);
+                    fileOut.println("100,demo");
+                    fileOut.close();
+                    fileIn = new BufferedReader(new FileReader(nombreArchivo));
+            }
+            String dato = fileIn.readLine();
+
+            while(dato != null) {
+                    arr = dato.split(",");
+                    int num = (Integer.parseInt(arr[0]));
+                    String nom = arr[1];
+                    vec.add(new Puntaje(nom, num));
+                    dato = fileIn.readLine();
+            }
+            fileIn.close();
+        }
+        
+        /**
+        * Metodo que agrega la informacion del vector al archivo.
+        *
+        * @throws IOException
+        */
+       public void grabaArchivo() throws IOException{
+           PrintWriter fileOut = new PrintWriter(new FileWriter(nombreArchivo));
+           for (int i=0; i<vec.size(); i++) {
+                   Puntaje x;
+                   x = (Puntaje) vec.get(i);
+                   fileOut.println(x.toString());
+           }
+           fileOut.close();	
+       }
 
  }
