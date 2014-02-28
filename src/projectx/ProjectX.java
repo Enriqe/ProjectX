@@ -18,7 +18,7 @@ public class ProjectX {
     public static void main(String[] args) {
          	JFrameProjectX juego = new JFrameProjectX();
  		juego.setVisible(true);
-                juego.setSize(500, 500);
+                juego.setSize(900, 700);
     }
     
 }
