@@ -47,9 +47,9 @@ import java.awt.event.MouseMotionListener;
 	private int direccion;    // Direccion del elefante
 	private Image dbImage;	// Imagen a proyectar	
 	private Graphics dbg;	// Objeto grafico
-	private Bueno babe;    // Objeto de la clase Bueno
-	private Malo vampiro;    //Objeto de la clase Malo
-        private LinkedList<Malo> lista; // lista para guardar los monitos malos
+	private Canasta babe;    // Objeto de la clase Canasta
+	private Proyectil vampiro;    //Objeto de la clase Proyectil
+        private LinkedList<Proyectil> lista; // lista para guardar los monitos malos
         private int velocidad;
         boolean pausa;
         boolean desaparece;
@@ -57,7 +57,7 @@ import java.awt.event.MouseMotionListener;
 	private SoundClip beep;	//Sonido de beep
         int score;
         private List<Integer> listaNum;
-        int numMalos;
+        int numProyectils;
  	
  	public JFrameProjectX(){
  		setTitle("BEST GAME EVER");
@@ -78,9 +78,9 @@ import java.awt.event.MouseMotionListener;
 		direccion = 0;
 		int posX = (int) (getWidth() / 2);    // posicion en x en medio de la applet
 		int posY = (int) (getHeight() /2);    // posicion en y enmedio de la applet
-		babe = new Bueno(posX,posY);
+		babe = new Canasta(posX,posY);
 		setBackground (Color.yellow);
-                lista = new LinkedList<Malo>();  //lista encadenada para guardar malos
+                lista = new LinkedList<Proyectil>();  //lista encadenada para guardar malos
                 pausa = false; // iniciliza la pausa como false
                 desaparece = false;
 
@@ -95,25 +95,25 @@ import java.awt.event.MouseMotionListener;
                 listaNum.add(12);
                 Collections.shuffle(listaNum); //revuelve la lista
                 
-                numMalos = listaNum.get(0);// saca un numero random de la lista
-                int mitadMalos = numMalos/2;
+                numProyectils = listaNum.get(0);// saca un numero random de la lista
+                int mitadProyectils = nums/2;
 
 
-                for (int i = 0; i < mitadMalos; i++){ // primera mitad de los malos aparecen por la parte izq
+                for (int i = 0; i < mitadProyectils; i++){ // primera mitad de los malos aparecen por la parte izq
                     //int posrX = (int) (Math.random() * (getWidth()));    
                     int posrY = (int) (Math.random() * (getHeight()));
                     velocidad = (int) (Math.random()*3)+3;
-                    vampiro = new Malo(-2,posrY, velocidad);
+                    vampiro = new Proyectil(-2,posrY, velocidad);
                     vampiro.setPosX(vampiro.getPosX() - vampiro.getAncho());
                     vampiro.setPosY(vampiro.getPosY() - vampiro.getAlto());
                     lista.add(vampiro);
                 }
                 
-                for (int i = mitadMalos; i < numMalos; i++){ /// segunda mitad de los malos aparecen por parte der
+                for (int i = mitadProyectils; i < numProyectils; i++){ /// segunda mitad de los malos aparecen por parte der
                     //int posrX = (int) (Math.random() * (getWidth()));    
                     int posrY = (int) (Math.random() * (getHeight()));
                     velocidad = (int) -((Math.random()*3)+3);
-                    vampiro = new Malo(getWidth()+3,posrY, velocidad);
+                    vampiro = new Proyectil(getWidth()+3,posrY, velocidad);
                     vampiro.setPosX(vampiro.getPosX() - vampiro.getAncho());
                     vampiro.setPosY(vampiro.getPosY() - vampiro.getAlto());
                     lista.add(vampiro);
@@ -216,7 +216,7 @@ import java.awt.event.MouseMotionListener;
                    }
                }
 
-               for (Malo vampiro : lista) {
+               for (Proyectil vampiro : lista) {
                    vampiro.setPosX(vampiro.getPosX() + vampiro.getVelocidad());
                }
 
@@ -229,7 +229,7 @@ import java.awt.event.MouseMotionListener;
                tiempoActual += tiempoTranscurrido;
                //Actualiza la animación en base al tiempo transcurrido
                babe.animBabe.actualiza(tiempoTranscurrido);
-               for (Malo vampiro : lista) {
+               for (Proyectil vampiro : lista) {
                    vampiro.animVamp.actualiza(tiempoTranscurrido);
                }
             
@@ -249,7 +249,7 @@ import java.awt.event.MouseMotionListener;
 		}
 
 		//Colision entre objetos
-                for (Malo vampiro : lista) {
+                for (Proyectil vampiro : lista) {
                     //Colision entre objetos
                     if( babe.intersecta(vampiro)) {
                             colisiono=true;
@@ -280,7 +280,7 @@ import java.awt.event.MouseMotionListener;
                 }
                 
                 //colision entre paredes
-                for (Malo vampiro : lista) {
+                for (Proyectil vampiro : lista) {
                     if(vampiro.getVelocidad()<0){
                             if (vampiro.getPosX() + vampiro.getAncho() < -125 ) {
                                     int posrY = (int) (Math.random() * (getHeight()));
@@ -416,7 +416,7 @@ import java.awt.event.MouseMotionListener;
 			g.drawImage(vampiro.getImagen(), vampiro.getPosX(),
                                     vampiro.getPosY(), this);
                         //pinta los vampiros en la lista
-                        for (Malo vampiro : lista) {
+                        for (Proyectil vampiro : lista) {
                             g.drawImage(vampiro.getImagen(), vampiro.getPosX(), vampiro.getPosY(), this);
                         }
                         //score = vampiro.getConteo();
