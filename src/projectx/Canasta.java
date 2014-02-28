@@ -7,100 +7,96 @@
 package projectx;
 
 /**
- * Clase Malo
+ * Clase Elefante
  *
  * @author Antonio Mejorado
  * @version 1.00 2008/6/13
  */
-
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.util.ArrayList;
+import javax.swing.ImageIcon;
 
-public class Canasta extends Base{
-    private static int conteo;
-    private long tiempoActual;
-    private long tiempoInicial;
-    private int velocidad;
+public class Bueno extends Base{
 
-    /**
-     * Metodo constructor que hereda los atributos de la clase
-     * <code>Base</code>.
-     *
-     * @param posX es la <code>posiscion en x</code> del objeto malo.
-     * @param posY es el <code>posiscion en y</code> del objeto malo.
-     */
-    public Canasta(int posX, int posY) {
-        super(posX, posY);
-        //Se cargan las imágenes(cuadros) para la animación
-        Image ham1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenes/Monkeys/0.gif"));
-        Image ham2 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenes/Monkeys/1.gif"));
-        Image ham3 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenes/Monkeys/2.gif"));
-        Image ham4 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenes/Monkeys/3.gif"));
-        Image ham5 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenes/Monkeys/4.gif"));
-        Image ham6 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenes/Monkeys/5.gif"));
-        Image ham7 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenes/Monkeys/6.gif"));
-        Image ham8 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenes/Monkeys/7.gif"));
-        Image ham9 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenes/Monkeys/8.gif"));
-        Image ham10 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenes/Monkeys/9.gif"));
-        Image ham11 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenes/Monkeys/10.gif"));
-        Image ham12 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenes/Monkeys/11.gif"));
-        Image ham13 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenes/Monkeys/12.gif"));
-        Image ham14 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenes/Monkeys/13.gif"));
-        Image ham15 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenes/Monkeys/14.gif"));
+        private final String DESAPARECE = "DESAPARECE";
+        private final String PAUSADO = "PAUSADO";
+        protected Animacion animBabe;
+        private int posX;    //posicion en x.       
+	private int posY;	//posicion en y.
 
-        //Se crea la animación
-        anim = new Animacion();
-        anim.sumaCuadro(ham1, 200);
-        anim.sumaCuadro(ham2, 200);
-        anim.sumaCuadro(ham3, 200);
-        anim.sumaCuadro(ham4, 200);
-        anim.sumaCuadro(ham5, 200);
-        anim.sumaCuadro(ham6, 200);
-        anim.sumaCuadro(ham7, 200);
-        anim.sumaCuadro(ham8, 200);
-        anim.sumaCuadro(ham9, 200);
-        anim.sumaCuadro(ham10, 200);
-        anim.sumaCuadro(ham11, 200);
-        anim.sumaCuadro(ham12, 200);
-        anim.sumaCuadro(ham13, 200);
-        anim.sumaCuadro(ham14, 200);
-        anim.sumaCuadro(ham15, 200);
-    }
+	public Bueno(int posX,int posY){
+            
+		super(posX,posY);	//constructor
 
-    /**
-     * Metodo modificador usado para cambiar la velocidad del objeto
-     *
-     * @param vel es la <code>velocidad</code> del objeto.
-     */
-    public void setVelocidad(int vel) {
-        velocidad = vel;
-    }
+                //Se cargan las imágenes(cuadros) para la animación del malo
+		Image bueno1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenesBueno/0.gif"));
+		Image bueno2 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenesBueno/1.gif"));
+		Image bueno3 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenesBueno/2.gif"));
+		Image bueno4 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenesBueno/3.gif"));
+		Image bueno5 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenesBueno/4.gif"));
+		Image bueno6 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenesBueno/5.gif"));
+		Image bueno7 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenesBueno/6.gif"));
+		Image bueno8 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenesBueno/7.gif"));
+		Image bueno9 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenesBueno/8.gif"));
+		Image bueno10 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenesBueno/9.gif"));                  
+                
+                //for (int i = 0; i < 10; i++)
+                  //  animBabe.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenesBueno/" + i + ".gif")), 100);
 
-    /**
-     * Metodo de acceso que regresa la velocidad del objeto
-     *
-     * @return velocidad es la <code>velocidad</code> del objeto.
-     */
-    public int getVelocidad() {
-        return velocidad;
-    }
+                //Se crea una nueva animacion con la inizialicacion dada
+                animBabe = new Animacion();
+		animBabe.sumaCuadro(bueno1, 100);
+		animBabe.sumaCuadro(bueno2, 100);
+		animBabe.sumaCuadro(bueno3, 100);
+		animBabe.sumaCuadro(bueno4, 100);
+                animBabe.sumaCuadro(bueno5, 100);
+                animBabe.sumaCuadro(bueno6, 100);
+		animBabe.sumaCuadro(bueno7, 100);
+                animBabe.sumaCuadro(bueno8, 100);
+                animBabe.sumaCuadro(bueno9, 100);
+		animBabe.sumaCuadro(bueno10, 100);
+	}
 
-    /**
-     * Metodo modificador usado para cambiar el conteo de la clase Malo
-     *
-     * @param cont es el <code>score</code> de la clase.
-     */
-    public static void setConteo(int cont) {
-        conteo = cont;
-    }
-
-    /**
-     * Metodo de acceso que regresa el conteo de la clase Malo
-     *
-     * @return conteo es la variable <code>conteo</code> de la clase.
-     */
-    public static int getConteo() {
-        return conteo;
-    }
+        /**
+	 * Metodo de acceso que regresa el ancho del icono 
+	 * @return un objeto de la clase <code>ImageIcon</code> que es el ancho del icono.
+	 */
+	public int getAncho() {
+		return (new ImageIcon(animBabe.getImagen())).getIconWidth();
+	}
+        
+        /**
+	 * Metodo de acceso que regresa el alto del icono 
+	 * @return un objeto de la clase <code>ImageIcon</code> que es el alto del icono.
+	 */
+	public int getAlto() {
+		return (new ImageIcon(animBabe.getImagen())).getIconHeight();
+	}
+        
+        /**
+	 * Metodo de acceso que regresa la imagen del icono 
+	 * @return un objeto de la clase <code>Image</code> que es la imagen del icono.
+	 */
+	public Image getImagen() {
+		return (new ImageIcon(animBabe.getImagen())).getImage();
+	}
+        
+        /** 
+         * Metodo de acceso que regresa la string pausada 
+         * @return un string constante
+         */
+        public String getPausa() {
+            return PAUSADO;
+        }
+        
+        /** 
+         * Metodo de acceso que regresa la string pausada 
+         * @return un string constante
+         */
+        public String getDesaparece() {
+            return DESAPARECE;
+        }
+        
 
 }

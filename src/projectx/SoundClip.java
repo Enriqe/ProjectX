@@ -4,10 +4,6 @@
  * and open the template in the editor.
  */
 
-/**
- *
- * @author roelcastano
- */
 package projectx;
 
 /**
