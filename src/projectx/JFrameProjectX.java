@@ -96,7 +96,7 @@ import java.awt.event.MouseMotionListener;
                 Collections.shuffle(listaNum); //revuelve la lista
                 
                 numProyectils = listaNum.get(0);// saca un numero random de la lista
-                int mitadProyectils = nums/2;
+                int mitadProyectils = numProyectils/2;
 
 
                 for (int i = 0; i < mitadProyectils; i++){ // primera mitad de los malos aparecen por la parte izq
