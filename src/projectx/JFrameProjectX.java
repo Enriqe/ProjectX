@@ -196,7 +196,9 @@ import java.awt.event.MouseMotionListener;
                //Guarda el tiempo actual
                tiempoActual += tiempoTranscurrido;
                //Actualiza la animación en base al tiempo transcurrido
-               carro.animBabe.actualiza(tiempoTranscurrido);
+               if(direccion!= 0) {
+                    carro.animBabe.actualiza(tiempoTranscurrido);
+               }
                pajaro.animBabe.actualiza(tiempoTranscurrido);
                for (Proyectil popo : lista) {
                    popo.animVamp.actualiza(tiempoTranscurrido);
@@ -365,7 +367,7 @@ import java.awt.event.MouseMotionListener;
              * @param e es el <code>evento</code> que se genera en al soltar las teclas.
              */
         public void keyReleased(KeyEvent e){
-            //
+            direccion = 0;
         }
     
 	/**
