@@ -20,19 +20,11 @@ public class Proyectil extends Base {
 		super(posX,posY); //constructor
                 velocidad = vel;
                 //Se cargan las imágenes(cuadros) para la animación del malo
-		Image malo1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenesProyectil/0.gif"));
-		Image malo2 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenesProyectil/1.gif"));
-		Image malo3 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenesProyectil/2.gif"));
-		Image malo4 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenesProyectil/3.gif"));
-		Image malo5 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenesProyectil/4.gif"));
+		Image malo1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenesProyectil/birdPoop.gif"));
                 
                 //Se crea la animación
 		animVamp = new Animacion();
 		animVamp.sumaCuadro(malo1, 100);
-		animVamp.sumaCuadro(malo2, 100);
-		animVamp.sumaCuadro(malo3, 100);
-		animVamp.sumaCuadro(malo4, 100);
-                animVamp.sumaCuadro(malo5, 100);
 	}
         
         
