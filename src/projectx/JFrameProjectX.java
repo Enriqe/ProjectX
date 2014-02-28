@@ -49,6 +49,7 @@ import java.awt.event.MouseMotionListener;
 	private Graphics dbg;	// Objeto grafico
 	private Canasta carro;    // Objeto de la clase Canasta
 	private Proyectil popo;    //Objeto de la clase Proyectil
+        private Pajaro pajaro;
         private LinkedList<Proyectil> lista; // lista para guardar los monitos malos
         private int velocidad;
         boolean pausa;
@@ -78,6 +79,11 @@ import java.awt.event.MouseMotionListener;
 		int posX = (int) (getWidth() / 2);    // posicion en x en medio de la applet
 		int posY = (int) (getHeight() /2);    // posicion en y enmedio de la applet
 		carro = new Canasta(posX,posY);
+		int posPajaroX = (int) (getWidth() / 8);    // posicion en x en medio de la applet
+		int posPajaroY = (int) (getHeight() / 2);    // posicion en y enmedio de la applet
+                pajaro = new Pajaro(posPajaroX, posPajaroY);
+                pajaro.setPosX(pajaro.getPosX()-(pajaro.getAncho()/2));
+                pajaro.setPosY(pajaro.getPosY()-(pajaro.getAlto()/2));
 		setBackground (Color.yellow);
                 lista = new LinkedList<Proyectil>();  //lista encadenada para guardar malos
                 pausa = false; // iniciliza la pausa como false
@@ -228,6 +234,7 @@ import java.awt.event.MouseMotionListener;
                tiempoActual += tiempoTranscurrido;
                //Actualiza la animación en base al tiempo transcurrido
                carro.animBabe.actualiza(tiempoTranscurrido);
+               pajaro.animBabe.actualiza(tiempoTranscurrido);
                for (Proyectil popo : lista) {
                    popo.animVamp.actualiza(tiempoTranscurrido);
                }
@@ -412,6 +419,7 @@ import java.awt.event.MouseMotionListener;
             
 		if (carro != null && popo != null) {
                         g.drawImage(carro.getImagen(), carro.getPosX(), carro.getPosY(), this);
+                        g.drawImage(pajaro.getImagen(), pajaro.getPosX(), pajaro.getPosY(), this);
 			g.drawImage(popo.getImagen(), popo.getPosX(),
                                     popo.getPosY(), this);
                         //pinta los popos en la lista
