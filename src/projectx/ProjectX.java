@@ -16,9 +16,9 @@ public class ProjectX {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-         	JFrameProjectX holaMundo = new JFrameProjectX();
- 		holaMundo.setVisible(true);
-                holaMundo.setSize(500, 500);
+         	JFrameProjectX juego = new JFrameProjectX();
+ 		juego.setVisible(true);
+                juego.setSize(500, 500);
     }
     
 }

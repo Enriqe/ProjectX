@@ -17,7 +17,7 @@ import java.awt.Toolkit;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
-public class Bueno extends Base{
+public class Canasta extends Base{
 
         private final String DESAPARECE = "DESAPARECE";
         private final String PAUSADO = "PAUSADO";
@@ -25,24 +25,24 @@ public class Bueno extends Base{
         private int posX;    //posicion en x.       
 	private int posY;	//posicion en y.
 
-	public Bueno(int posX,int posY){
+	public Canasta(int posX,int posY){
             
 		super(posX,posY);	//constructor
 
                 //Se cargan las imágenes(cuadros) para la animación del malo
-		Image bueno1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenesBueno/0.gif"));
-		Image bueno2 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenesBueno/1.gif"));
-		Image bueno3 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenesBueno/2.gif"));
-		Image bueno4 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenesBueno/3.gif"));
-		Image bueno5 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenesBueno/4.gif"));
-		Image bueno6 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenesBueno/5.gif"));
-		Image bueno7 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenesBueno/6.gif"));
-		Image bueno8 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenesBueno/7.gif"));
-		Image bueno9 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenesBueno/8.gif"));
-		Image bueno10 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenesBueno/9.gif"));                  
+		Image bueno1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenesCanasta/0.gif"));
+		Image bueno2 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenesCanasta/1.gif"));
+		Image bueno3 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenesCanasta/2.gif"));
+		Image bueno4 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenesCanasta/3.gif"));
+		Image bueno5 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenesCanasta/4.gif"));
+		Image bueno6 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenesCanasta/5.gif"));
+		Image bueno7 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenesCanasta/6.gif"));
+		Image bueno8 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenesCanasta/7.gif"));
+		Image bueno9 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenesCanasta/8.gif"));
+		Image bueno10 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenesCanasta/9.gif"));                  
                 
                 //for (int i = 0; i < 10; i++)
-                  //  animBabe.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenesBueno/" + i + ".gif")), 100);
+                  //  animBabe.sumaCuadro(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("imagenesCanasta/" + i + ".gif")), 100);
 
                 //Se crea una nueva animacion con la inizialicacion dada
                 animBabe = new Animacion();
