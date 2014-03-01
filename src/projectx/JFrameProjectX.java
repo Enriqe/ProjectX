@@ -61,7 +61,8 @@ import java.io.IOException;
         private Pajaro pajaro;
         private LinkedList<Proyectil> lista; // lista para guardar los monitos malos
         private int velocidad;
-        boolean pausa;
+        boolean pausa;   //booleana para ver si el usuario quiere pausar
+        boolean guardar; //booleana para verificar si el usuario quiere guardar
         boolean desaparece;
         private SoundClip explosion;	//Sonido de explosion
 	private SoundClip beep;	//Sonido de beep
@@ -86,7 +87,7 @@ import java.io.IOException;
         public void init() {
                 setSize(900, 700);
                 score = 0;
-                vidas = 0;
+                vidas = 5;
                 nombreArchivo = "Puntaje.txt";
                 vec = new Vector();
                 colisiono = false;
@@ -103,6 +104,7 @@ import java.io.IOException;
 		setBackground (Color.yellow);
                 lista = new LinkedList<Proyectil>();  //lista encadenada para guardar malos
                 pausa = false; // iniciliza la pausa como false
+                guardar = false; // guardar inizializa como false
                 desaparece = false;
 
                 //int posrX = (int) (Math.random() * (getWidth()));    
@@ -164,7 +166,7 @@ import java.io.IOException;
      */
 	public void run () {
             	//Guarda el tiempo actual del sistema
-                while(vidas>0){
+                while( /*vidas>0 && */ guardar == false){
                         tiempoActual = System.currentTimeMillis();
                         while (true) {
                                 if(!pausa){
@@ -179,8 +181,10 @@ import java.io.IOException;
                                 catch (InterruptedException ex)	{
                                         System.out.println("Error en " + ex.toString());
                                 }
+                                System.out.print("oooo");
                         }
                 }
+                System.out.println(" lsdjfslf");
                 String nombre = JOptionPane.showInputDialog("Cual es tu nombre?");
                 JOptionPane.showMessageDialog(null, 
                               "El puntaje de " + nombre + " es: " + score, "PUNTAJE", 
@@ -382,6 +386,9 @@ import java.io.IOException;
                         else
                             pausa = true;
                     }
+                    if (e.getKeyCode() == KeyEvent.VK_G){
+                            guardar = true;
+                    }
                         
         }
 
@@ -401,6 +408,7 @@ import java.io.IOException;
              */
         public void keyReleased(KeyEvent e){
             direccion = 0;
+            guardar = false;
         }
     
 	/**
