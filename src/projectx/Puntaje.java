@@ -22,6 +22,7 @@ public class Puntaje {
     private int vidas; //Guarda las vidas del jugador
     private int perdidas; // Guarda num intentos
     private int sonActiv; // Guarda sonido activado o no
+    private int movimiento; //Guarda si se mueve el proyectil o no
 
     /**
      * Constructor vacio con darle valores iniciales al momento de crear el
@@ -36,6 +37,7 @@ public class Puntaje {
         velYPopo = 0;
         vidas = 0;
         perdidas = 0;
+        movimiento = 0;
         int sonActiv = 1;
     }
 
@@ -52,7 +54,7 @@ public class Puntaje {
      * 
      */
     public Puntaje(int puntaje, int posXCarro, int posXPopo, int posYPopo, int velXPopo, int velYPopo, int vidas, 
-                                            int perdidas, int sonActiv) {
+                                            int perdidas, int sonActiv, int mov) {
         //Asigna los valores de los parametros al objeto Puntaje
         this.puntaje = puntaje;
         this.posXCarro = posXCarro;
@@ -63,7 +65,26 @@ public class Puntaje {
         this.vidas = vidas;
         this.perdidas = perdidas;
         this.sonActiv = sonActiv;
+        this.movimiento = mov;
     }
+    
+              /**
+     * Metodo modificador usado para modificar el estado del proyectil
+     *
+     * @param sonActiv es binario para modificar activcion del<code>mov</code> 
+     */
+    public void setMovimiento(int mov) {
+        this.movimiento = mov;
+    }
+
+    /**
+     * Metodo de acceso que regresa si el proyectil se mueve o no
+     *
+     * @return valor si esta activo o no el movimienot <code>movimiento</code>.
+     */
+    public int getMovimiento() {
+        return movimiento;
+    }  
                                                     
           /**
      * Metodo modificador usado para modificar la activacion del sonido
@@ -238,6 +259,6 @@ public class Puntaje {
                 + getposXPopo() + "," + getposYPopo() + ","
                 + getvelXPopo() + "," + getvelYPopo() + ","
                 + getVidas() + "," +  getPerdidas() + ","
-                + getSonActiv();
+                + getSonActiv() + "," + getMovimiento();
     }
 }
