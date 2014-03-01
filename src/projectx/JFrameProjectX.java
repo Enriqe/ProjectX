@@ -450,6 +450,7 @@ import java.io.IOException;
                     int num = (Integer.parseInt(arr[0]));
                     String nom = arr[1];
                     vec.add(new Puntaje(nom, num));
+                    //score, carro.getPosX(), popo.getPosX(), popo.getPosY(), popo.getVelocidadX(), popo.getVelocidadY(), vidas)
                     dato = fileIn.readLine();
             }
             fileIn.close();
