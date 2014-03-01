@@ -66,6 +66,7 @@ import java.io.IOException;
         private int velocidad;
         boolean pausa;   //booleana para ver si el usuario quiere pausar
         boolean guardar; //booleana para verificar si el usuario quiere guardar
+        boolean cargado; // booleana para verificar si quiere cargar
         private int velocidadX;
         private int velocidadY;
         boolean desaparece;
@@ -114,6 +115,7 @@ import java.io.IOException;
 		setBackground (Color.yellow);
                 pausa = false; // iniciliza la pausa como false
                 guardar = false; // guardar inizializa como false
+                cargado = false; // cargado empieza false
                 desaparece = false;
 
                 //int posrX = (int) (Math.random() * (getWidth()));    
@@ -186,7 +188,6 @@ import java.io.IOException;
                                 }
                                 
                                 if(guardar){
-                                    //guarda pos
                                     try {
                                           
                                           leeArchivo();    //lee el contenido del archivo
@@ -219,6 +220,22 @@ import java.io.IOException;
 	 * 
 	 */
 	public void actualiza() {
+            
+                if(cargado){
+                        score = (Integer.parseInt(arr[0]));
+                        int carX = (Integer.parseInt(arr[1]));
+                        carro.setPosX(carX);
+                        int xpPopo = (Integer.parseInt(arr[2]));
+                        popo.setPosX(xpPopo);
+                        int ypPopo = (Integer.parseInt(arr[3]));
+                        popo.setPosY(ypPopo);
+                        int xvPopo = (Integer.parseInt(arr[4]));
+                        popo.setVelocidadX(xvPopo);
+                        int yvPopo = (Integer.parseInt(arr[5]));
+                        popo.setVelocidadX(yvPopo);
+                        int lif = (Integer.parseInt(arr[6]));
+                        vidas = lif;
+                }
             
                 switch(direccion){
                    case 3: {
@@ -385,6 +402,9 @@ import java.io.IOException;
                     if (e.getKeyCode() == KeyEvent.VK_I){
                         instrucciones = !instrucciones;
                     }
+                    if (e.getKeyCode() == KeyEvent.VK_C){
+                        cargado = true;
+                    }
                         
         }
 
@@ -404,6 +424,7 @@ import java.io.IOException;
         public void keyReleased(KeyEvent e){
             direccion = 0;
             guardar = false;
+            cargado = false;
         }
     
 	/**
@@ -464,7 +485,11 @@ import java.io.IOException;
             } catch (FileNotFoundException e){
                     File puntos = new File(nombreArchivo);
                     PrintWriter fileOut = new PrintWriter(puntos);
-                    fileOut.println("100,demo");
+                    fileOut.println("100,300,400,200,12,9,3");
+                    /* "" + getPuntaje() + "," + getposXCarro() + ","
+                         + getposXPopo() + "," + getposYPopo() + "," 
+                        + getvelXPopo() + "," + getvelYPopo() + ","
+                        + getVidas();*/
                     fileOut.close();
                     fileIn = new BufferedReader(new FileReader(nombreArchivo));
             }
@@ -473,8 +498,13 @@ import java.io.IOException;
             while(dato != null) {
                     arr = dato.split(",");
                     int num = (Integer.parseInt(arr[0]));
-                    String nom = arr[1];
-                    vec.add(new Puntaje(nom, num));
+                    int pXCarro = (Integer.parseInt(arr[1]));
+                    int pXPopo = (Integer.parseInt(arr[2]));
+                    int pYPopo = (Integer.parseInt(arr[3]));
+                    int vXPopo = (Integer.parseInt(arr[4]));
+                    int vYPopo = (Integer.parseInt(arr[5]));
+                    int vid = (Integer.parseInt(arr[6]));
+                    vec.add(new Puntaje(num, pXCarro, pXPopo, pYPopo, vXPopo, vYPopo, vid));
                     dato = fileIn.readLine();
             }
             fileIn.close();
