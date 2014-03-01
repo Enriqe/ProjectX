@@ -71,6 +71,7 @@ import java.io.IOException;
 	private SoundClip beep;	//Sonido de beep
         int score;
         int vidas;
+        int perdidas;
         int numProyectils;
         private Vector vec;    // Objeto vector para agregar el puntaje.
         private String nombreArchivo;    //Nombre del archivo.
@@ -91,6 +92,7 @@ import java.io.IOException;
                 choco = false;
                 aceleracion = 1;
                 score = 0;
+                perdidas = 0;
                 vidas = 5;
                 nombreArchivo = "Puntaje.txt";
                 vec = new Vector();
@@ -264,8 +266,7 @@ import java.io.IOException;
                         colisiono=true;
                         //beep.play();
                         desaparece = true;
-                        score++;
-                        popo.setConteo(popo.getConteo()+1);
+                        popo.setConteo(popo.getConteo() + 2);
                         popo.setPosX(pajaro.getPosX() + pajaro.getAncho());
                         popo.setPosY(pajaro.getPosY() + (pajaro.getAlto()/2));
                         choco = true;
@@ -283,6 +284,12 @@ import java.io.IOException;
                     popo.setPosX(pajaro.getPosX()+pajaro.getAncho());
                     popo.setPosY(pajaro.getPosY()+pajaro.getAlto()/2);
                     choco = true;
+                    if (perdidas < 2) {
+                        perdidas++;
+                    } else {
+                        vidas--;
+                        perdidas = 0;
+                    }
                 }
 	}
         
@@ -405,6 +412,8 @@ import java.io.IOException;
                         g.drawImage(popo.getImagen(), popo.getPosX(), popo.getPosY(), this);
                         //score = popo.getConteo();
                         g.drawString("SCORE: " + popo.getConteo(), 20, 40);
+                        g.drawString("PERDIDAS: " + perdidas, 20, 60);
+                        g.drawString("VIDAS: " + vidas, 20, 80);
                         if(pausa){
                             g.drawString(""+carro.getPausa(),carro.getPosX()+carro.getAncho(), carro.getPosY());
                         }
