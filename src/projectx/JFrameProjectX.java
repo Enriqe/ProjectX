@@ -194,7 +194,8 @@ import java.io.IOException;
                                           leeArchivo();    //lee el contenido del archivo
                                           //Agrega el contenido del nuevo puntaje al vector.
                                           //guarda posX del carrodel carro, posX y posY y velX y velY popo
-                                          vec.add(new Puntaje( score, carro.getPosX(), popo.getPosX(), popo.getPosY(), popo.getVelocidadX(), popo.getVelocidadY(), vidas));
+                                          int sonActiv = (sonidosActivados ? 1 : 0);
+                                          vec.add(new Puntaje( score, carro.getPosX(), popo.getPosX(), popo.getPosY(), popo.getVelocidadX(), popo.getVelocidadY(), vidas, perdidas, sonActiv));
                                           //Graba el vector en el archivo.
                                           grabaArchivo();
                                     } catch(IOException ex) {
@@ -238,6 +239,10 @@ import java.io.IOException;
                         popo.setVelocidadX(yvPopo);
                         int lif = (Integer.parseInt(arr[6]));
                         vidas = lif;
+                        int loss = (Integer.parseInt(arr[7]));
+                        perdidas = loss;
+                        int son = (Integer.parseInt(arr[8]));
+                        sonidosActivados = (son==1?true:false);
                 }
             
                 switch(direccion){
@@ -395,6 +400,7 @@ import java.io.IOException;
                             pausa = true;
                     }
                     if (e.getKeyCode() == KeyEvent.VK_G){
+                        if(!instrucciones)
                             guardar = true;
                     }
                     
@@ -502,8 +508,11 @@ import java.io.IOException;
                     int vXPopo = (Integer.parseInt(arr[4]));
                     int vYPopo = (Integer.parseInt(arr[5]));
                     int vid = (Integer.parseInt(arr[6]));
-                    vec.add(new Puntaje(num, pXCarro, pXPopo, pYPopo, vXPopo, vYPopo, vid));
+                    int per = (Integer.parseInt(arr[7]));
+                    int actSon = (Integer.parseInt(arr[8]));
+                    vec.add(new Puntaje(num, pXCarro, pXPopo, pYPopo, vXPopo, vYPopo, vid, per, actSon));
                     dato = fileIn.readLine();
+                   
             }
             fileIn.close();
         }
