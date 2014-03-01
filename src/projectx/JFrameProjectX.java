@@ -50,6 +50,8 @@ import java.io.IOException;
         private int aceleracion;
 	private long tiempoActual;
         boolean colisiono;              //flag de que colisiono
+        boolean sonidosActivados;
+        boolean instrucciones;
         int tiempoColision;             //contador para dejar la imagen colisionada
 	int posX, posY;
 	private static final long serialVersionUID = 1L;
@@ -67,8 +69,8 @@ import java.io.IOException;
         private int velocidadX;
         private int velocidadY;
         boolean desaparece;
-        private SoundClip explosion;	//Sonido de explosion
-	private SoundClip beep;	//Sonido de beep
+        private SoundClip coin;	//Sonido de coin
+	private SoundClip whip;	//Sonido de beep
         int score;
         int vidas;
         int perdidas;
@@ -81,8 +83,8 @@ import java.io.IOException;
  		setTitle("BEST GAME EVER");
  		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 //Carga los clips de sonido
-		//explosion = new SoundClip("sonidos/Explosion.wav");
-		//beep = new SoundClip("sonidos/beep-07.wav");
+		coin = new SoundClip("sounds/smw_coin.wav");
+		whip = new SoundClip("sounds/whip-whoosh-02.wav");
                 init();
                 start();
  	}
@@ -94,6 +96,8 @@ import java.io.IOException;
                 score = 0;
                 perdidas = 0;
                 vidas = 5;
+                sonidosActivados = true;
+                instrucciones = false;
                 nombreArchivo = "Puntaje.txt";
                 vec = new Vector();
                 colisiono = false;
@@ -266,7 +270,9 @@ import java.io.IOException;
                     //Colision entre objetos
                 if(carro.intersecta(popo)) {
                         colisiono=true;
-                        //beep.play();
+                        if (sonidosActivados){
+                            coin.play();
+                        }
                         desaparece = true;
                         popo.setConteo(popo.getConteo() + 2);
                         popo.setPosX(pajaro.getPosX() + pajaro.getAncho());
@@ -286,6 +292,9 @@ import java.io.IOException;
                     popo.setPosX(pajaro.getPosX()+pajaro.getAncho());
                     popo.setPosY(pajaro.getPosY()+pajaro.getAlto()/2);
                     choco = true;
+                    if (sonidosActivados){
+                        whip.play();
+                    }
                     if (perdidas < 2) {
                         perdidas++;
                     } else {
@@ -370,6 +379,14 @@ import java.io.IOException;
                     if (e.getKeyCode() == KeyEvent.VK_G){
                             guardar = true;
                     }
+                    
+                    if (e.getKeyCode() == KeyEvent.VK_S){
+                        sonidosActivados = !sonidosActivados;
+                    }
+                    
+                    if (e.getKeyCode() == KeyEvent.VK_I){
+                        instrucciones = !instrucciones;
+                    }
                         
         }
 
@@ -415,6 +432,14 @@ import java.io.IOException;
                         g.drawString("SCORE: " + popo.getConteo(), 20, 40);
                         g.drawString("PERDIDAS: " + perdidas, 20, 60);
                         g.drawString("VIDAS: " + vidas, 20, 80);
+                        if (instrucciones) {
+                            g.drawString("      INSTRUCCIONES       ", getWidth()/2-80, getHeight()/2);
+                            g.drawString("P - Pausar/Jugar", getWidth()/2-80, getHeight()/2+20);
+                            g.drawString("I - Instrucciones", getWidth()/2-80, getHeight()/2+40);
+                            g.drawString("G - Grabar juego", getWidth()/2-80, getHeight()/2+60);
+                            g.drawString("C - Cargar juego", getWidth()/2-80, getHeight()/2+80);
+                            g.drawString("S - Activar/Desactivar sonido", getWidth()/2-80, getHeight()/2+100);
+                        }
                         if(pausa){
                             g.drawString(""+carro.getPausa(),carro.getPosX()+carro.getAncho(), carro.getPosY());
                         }
