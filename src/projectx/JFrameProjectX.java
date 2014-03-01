@@ -216,13 +216,13 @@ import java.io.IOException;
             
                 switch(direccion){
                    case 3: {
-                           carro.setPosX(carro.getPosX() - 2);
+                           carro.setPosX(carro.getPosX() - 5);
                            //carro.setPosY(carro.getPosY() + 5);
                            break;    //se mueve hacia abajo izquierda
                    }
                    case 4: {
                            //carro.setPosX(carro.getPosX() - 5);
-                           carro.setPosX(carro.getPosX() + 2);
+                           carro.setPosX(carro.getPosX() + 5);
                            break;    //se mueve hacia arriba izquierda	
                    }
                }
