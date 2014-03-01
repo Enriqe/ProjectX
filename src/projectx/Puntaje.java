@@ -14,16 +14,26 @@ package projectx;
  */
 public class Puntaje {
 
-	private String nombre;
 	private int puntaje;
+        private int posXCarro;
+        private int posXPopo;
+        private int posYPopo;
+        private int velXPopo;
+        private int velYPopo;
+        private int vidas;
 
 	/**
 	 * Constructor vacio con darle valores iniciales al momento de
 	 * crear el objeto Puntaje
 	 */
 	public Puntaje() {
-		nombre = "";
 		puntaje = 0;
+                posXCarro = 0;
+                posXPopo = 0;
+                posYPopo = 0;
+                velXPopo = 0;
+                velYPopo = 0;
+                vidas = 0;
 	}
 
 	/**
@@ -31,26 +41,113 @@ public class Puntaje {
 	 * @param nombre es el <code>nombre</code> del objeto.
 	 * @param puntaje es el <code>puntaje</code> del objeto.
 	 */
-	public Puntaje(String nombre, int puntaje) {
-		this.nombre = nombre;
+	public Puntaje(int puntaje, int posXCarro, int posXPopo, int posYPopo, int velXPopo, int velYPopo, int vidas) {
 		this.puntaje = puntaje;
+                this.posXCarro = posXCarro;
+                this.posXPopo = posXPopo;
+                this.posYPopo = posYPopo;
+                this.velXPopo = velXPopo;
+                this.velYPopo = velYPopo;
+                this.vidas = vidas;
+	}
+        
+                                        	/**
+	 * Metodo modificador usado para cambiar el puntaje del objeto
+	 * @param puntaje es el <code>puntaje</code> del objeto.
+	 */
+	public void setVidas(int vidas) {
+		this.vidas = vidas;
 	}
 
 	/**
-	 * Metodo modificador usado para cambiar el nombre del objeto.
-	 * @param nombre es el <code>nombre</code> del objeto.
+	 * Metodo de acceso que regresa el puntaje del objeto 
+	 * @return puntaje es el <code>puntaje</code> del objeto.
 	 */
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public int getVidas() {
+		return vidas;
+	}
+        
+                                	/**
+	 * Metodo modificador usado para cambiar el puntaje del objeto
+	 * @param puntaje es el <code>puntaje</code> del objeto.
+	 */
+	public void setvelYPopo(int velYPopo) {
+		this.velYPopo = velYPopo;
 	}
 
 	/**
-	 * Metodo de acceso que regresa el nombre del objeto 
-	 * @return nombre es el <code>nombre</code> del objeto.
+	 * Metodo de acceso que regresa el puntaje del objeto 
+	 * @return puntaje es el <code>puntaje</code> del objeto.
 	 */
-	public String getNombre() {
-		return nombre;
+	public int getvelYPopo() {
+		return velYPopo;
 	}
+        
+                        	/**
+	 * Metodo modificador usado para cambiar el puntaje del objeto
+	 * @param puntaje es el <code>puntaje</code> del objeto.
+	 */
+	public void setvelXPopo(int velXPopo) {
+		this.velXPopo = velXPopo;
+	}
+
+	/**
+	 * Metodo de acceso que regresa el puntaje del objeto 
+	 * @return puntaje es el <code>puntaje</code> del objeto.
+	 */
+	public int getvelXPopo() {
+		return velXPopo;
+	}
+        
+                	/**
+	 * Metodo modificador usado para cambiar el puntaje del objeto
+	 * @param puntaje es el <code>puntaje</code> del objeto.
+	 */
+	public void setposYPopo(int posYPopo) {
+		this.posYPopo = posYPopo;
+	}
+
+	/**
+	 * Metodo de acceso que regresa el puntaje del objeto 
+	 * @return puntaje es el <code>puntaje</code> del objeto.
+	 */
+	public int getposYPopo() {
+		return posYPopo;
+	}
+        
+        	/**
+	 * Metodo modificador usado para cambiar el puntaje del objeto
+	 * @param puntaje es el <code>puntaje</code> del objeto.
+	 */
+	public void setposXPopo(int posXPopo) {
+		this.posXPopo = posXPopo;
+	}
+
+	/**
+	 * Metodo de acceso que regresa el puntaje del objeto 
+	 * @return puntaje es el <code>puntaje</code> del objeto.
+	 */
+	public int getposXPopo() {
+		return posXPopo;
+	}
+
+        	/**
+	 * Metodo modificador usado para cambiar el puntaje del objeto
+	 * @param puntaje es el <code>puntaje</code> del objeto.
+	 */
+	public void setposXCarro(int posXCarro) {
+		this.posXCarro = posXCarro;
+	}
+
+	/**
+	 * Metodo de acceso que regresa el puntaje del objeto 
+	 * @return puntaje es el <code>puntaje</code> del objeto.
+	 */
+	public int getposXCarro() {
+		return posXCarro;
+	}
+
+
 
 	/**
 	 * Metodo modificador usado para cambiar el puntaje del objeto
@@ -73,6 +170,9 @@ public class Puntaje {
 	 * @return un objeto de la clase <code>String</code>.
 	 */
 	public String toString(){
-		return "" + getPuntaje() + "," + getNombre();
+		return "" + getPuntaje() + "," + getposXCarro() + ","
+                         + getposXPopo() + "," + getposYPopo() + "," 
+                        + getvelXPopo() + "," + getvelYPopo() + ","
+                        + getVidas();
 	}
 }
