@@ -20,6 +20,8 @@ public class Puntaje {
     private int velXPopo; //Guarda la velocidad en X del proyectil
     private int velYPopo; //Guarda la velocidad en Y del proyectil
     private int vidas; //Guarda las vidas del jugador
+    private int perdidas; // Guarda num intentos
+    private int sonActiv; // Guarda sonido activado o no
 
     /**
      * Constructor vacio con darle valores iniciales al momento de crear el
@@ -33,6 +35,8 @@ public class Puntaje {
         velXPopo = 0;
         velYPopo = 0;
         vidas = 0;
+        perdidas = 0;
+        int sonActiv = 1;
     }
 
     /**
@@ -45,8 +49,10 @@ public class Puntaje {
      * @param velXPopo es la <code>velocidad en X</code> del proyectil.
      * @param velYPopo es la <code>velocidad en Y</code> del proyectil.
      * @param vidas son las <code>vidas</code> del jugador.
+     * 
      */
-    public Puntaje(int puntaje, int posXCarro, int posXPopo, int posYPopo, int velXPopo, int velYPopo, int vidas) {
+    public Puntaje(int puntaje, int posXCarro, int posXPopo, int posYPopo, int velXPopo, int velYPopo, int vidas, 
+                                            int perdidas, int sonActiv) {
         //Asigna los valores de los parametros al objeto Puntaje
         this.puntaje = puntaje;
         this.posXCarro = posXCarro;
@@ -55,7 +61,46 @@ public class Puntaje {
         this.velXPopo = velXPopo;
         this.velYPopo = velYPopo;
         this.vidas = vidas;
+        this.perdidas = perdidas;
+        this.sonActiv = sonActiv;
     }
+                                                    
+          /**
+     * Metodo modificador usado para modificar la activacion del sonido
+     *
+     * @param sonActiv es binario para modificar activcion del<code>sonActiv</code> 
+     */
+    public void setSonActiv(int sonActiv) {
+        this.sonActiv = sonActiv;
+    }
+
+    /**
+     * Metodo de acceso que regresa si el sonido esta activado o no
+     *
+     * @return valor si esta activo o no el sonido <code>sonActiv</code>.
+     */
+    public int getSonActiv() {
+        return sonActiv;
+    }                                                
+                                               
+                                                    
+     /**
+     * Metodo modificador usado para cambiar num intentos del juego
+     *
+     * @param perdidas son los intentos <code>perdidas</code> del juego.
+     */
+    public void setPerdidas(int perdidas) {
+        this.perdidas = perdidas;
+    }
+
+    /**
+     * Metodo de acceso que regresa las num perdidas del juego
+     *
+     * @return perdidas son los num <code>perdidas</code> del juego.
+     */
+    public int getPerdidas() {
+        return perdidas;
+    }                                                
 
     /**
      * Metodo modificador usado para cambiar las vidas del objeto
@@ -192,6 +237,7 @@ public class Puntaje {
         return "" + getPuntaje() + "," + getposXCarro() + ","
                 + getposXPopo() + "," + getposYPopo() + ","
                 + getvelXPopo() + "," + getvelYPopo() + ","
-                + getVidas();
+                + getVidas() + "," +  getPerdidas() + ","
+                + getSonActiv();
     }
 }

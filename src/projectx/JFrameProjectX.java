@@ -191,10 +191,11 @@ import java.io.IOException;
                                     guardar = false;
                                     try {
                                           
-                                          leeArchivo();    //lee el contenido del archivo
+                                          //leeArchivo();    //lee el contenido del archivo
                                           //Agrega el contenido del nuevo puntaje al vector.
                                           //guarda posX del carrodel carro, posX y posY y velX y velY popo
                                           int sonActiv = (sonidosActivados ? 1 : 0);
+                                          vec.removeAllElements();
                                           vec.add(new Puntaje( score, carro.getPosX(), popo.getPosX(), popo.getPosY(), popo.getVelocidadX(), popo.getVelocidadY(), vidas, perdidas, sonActiv));
                                           //Graba el vector en el archivo.
                                           grabaArchivo();
@@ -203,7 +204,33 @@ import java.io.IOException;
                                           System.out.println("Error en " + ex.toString());
                                     }
                                 }
-                                else{
+                                else if(cargado){
+                                    try{
+                                        leeArchivo();
+                                    }catch(IOException ex) {
+
+                                          System.out.println("Error en " + ex.toString());
+                                    }
+                                    score = (Integer.parseInt(arr[0]));
+                                    int carX = (Integer.parseInt(arr[1]));
+                                    carro.setPosX(carX);
+                                    int xpPopo = (Integer.parseInt(arr[2]));
+                                    popo.setPosX(xpPopo);
+                                    int ypPopo = (Integer.parseInt(arr[3]));
+                                    popo.setPosY(ypPopo);
+                                    int xvPopo = (Integer.parseInt(arr[4]));
+                                    popo.setVelocidadX(xvPopo);
+                                    int yvPopo = (Integer.parseInt(arr[5]));
+                                    popo.setVelocidadX(yvPopo);
+                                    int lif = (Integer.parseInt(arr[6]));
+                                    vidas = lif;
+                                    int loss = (Integer.parseInt(arr[7]));
+                                    perdidas = loss;
+                                    int son = (Integer.parseInt(arr[8]));
+                                    sonidosActivados = (son==1?true:false);
+                                    cargado = false;
+                                }
+                                else {
                                 
                                         repaint();    // Se actualiza el <code>Applet</code> repintando el contenido.
 
@@ -224,27 +251,7 @@ import java.io.IOException;
 	 * 
 	 */
 	public void actualiza() {
-            
-                if(cargado){
-                        score = (Integer.parseInt(arr[0]));
-                        int carX = (Integer.parseInt(arr[1]));
-                        carro.setPosX(carX);
-                        int xpPopo = (Integer.parseInt(arr[2]));
-                        popo.setPosX(xpPopo);
-                        int ypPopo = (Integer.parseInt(arr[3]));
-                        popo.setPosY(ypPopo);
-                        int xvPopo = (Integer.parseInt(arr[4]));
-                        popo.setVelocidadX(xvPopo);
-                        int yvPopo = (Integer.parseInt(arr[5]));
-                        popo.setVelocidadX(yvPopo);
-                        int lif = (Integer.parseInt(arr[6]));
-                        vidas = lif;
-                        int loss = (Integer.parseInt(arr[7]));
-                        perdidas = loss;
-                        int son = (Integer.parseInt(arr[8]));
-                        sonidosActivados = (son==1?true:false);
-                }
-            
+
                 switch(direccion){
                    case 3: {
                            carro.setPosX(carro.getPosX() - 5);
