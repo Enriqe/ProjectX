@@ -188,6 +188,7 @@ import java.io.IOException;
                                 }
                                 
                                 if(guardar){
+                                    guardar = false;
                                     try {
                                           
                                           leeArchivo();    //lee el contenido del archivo
@@ -199,17 +200,19 @@ import java.io.IOException;
                                     } catch(IOException ex) {
 
                                           System.out.println("Error en " + ex.toString());
+                                    }
                                 }
-                                }
+                                else{
                                 
-                                repaint();    // Se actualiza el <code>Applet</code> repintando el contenido.
+                                        repaint();    // Se actualiza el <code>Applet</code> repintando el contenido.
 
-                                try	{
-                                        // El thread se duerme.
-                                        Thread.sleep (20);
-                                }
-                                catch (InterruptedException ex)	{
-                                        System.out.println("Error en " + ex.toString());
+                                        try	{
+                                                // El thread se duerme.
+                                                Thread.sleep (20);
+                                        }
+                                        catch (InterruptedException ex)	{
+                                                System.out.println("Error en " + ex.toString());
+                                        }
                                 }
                         }
                 
@@ -423,7 +426,6 @@ import java.io.IOException;
              */
         public void keyReleased(KeyEvent e){
             direccion = 0;
-            guardar = false;
             cargado = false;
         }
     
@@ -486,10 +488,6 @@ import java.io.IOException;
                     File puntos = new File(nombreArchivo);
                     PrintWriter fileOut = new PrintWriter(puntos);
                     fileOut.println("100,300,400,200,12,9,3");
-                    /* "" + getPuntaje() + "," + getposXCarro() + ","
-                         + getposXPopo() + "," + getposYPopo() + "," 
-                        + getvelXPopo() + "," + getvelYPopo() + ","
-                        + getVidas();*/
                     fileOut.close();
                     fileIn = new BufferedReader(new FileReader(nombreArchivo));
             }
