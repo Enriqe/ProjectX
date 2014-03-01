@@ -107,7 +107,7 @@ import java.io.IOException;
                 pajaro.setPosY(pajaro.getPosY()-(pajaro.getAlto()/2));
 		setBackground (Color.yellow);
                 pausa = false; // iniciliza la pausa como false
-                guardar = false; // guardar inizializa como false
+                guardar = true; // guardar inizializa como false
                 desaparece = false;
 
                 //int posrX = (int) (Math.random() * (getWidth()));    
@@ -217,11 +217,9 @@ import java.io.IOException;
                 switch(direccion){
                    case 3: {
                            carro.setPosX(carro.getPosX() - 5);
-                           //carro.setPosY(carro.getPosY() + 5);
                            break;    //se mueve hacia abajo izquierda
                    }
                    case 4: {
-                           //carro.setPosX(carro.getPosX() - 5);
                            carro.setPosX(carro.getPosX() + 5);
                            break;    //se mueve hacia arriba izquierda	
                    }
