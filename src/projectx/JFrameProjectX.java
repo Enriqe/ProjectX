@@ -59,6 +59,7 @@ import java.io.IOException;
 	private Graphics dbg;	// Objeto grafico
 	private Canasta carro;    // Objeto de la clase Canasta
 	private Proyectil popo;    //Objeto de la clase Proyectil
+        private boolean choco;
         private Pajaro pajaro;
         private int velocidad;
         boolean pausa;   //booleana para ver si el usuario quiere pausar
@@ -87,6 +88,7 @@ import java.io.IOException;
         
         public void init() {
                 setSize(900, 700);
+                choco = false;
                 aceleracion = 1;
                 score = 0;
                 vidas = 5;
@@ -110,9 +112,9 @@ import java.io.IOException;
 
                 //int posrX = (int) (Math.random() * (getWidth()));    
                 int posrY = (int) (Math.random() * (getHeight()));
-                velocidadX = (int) (Math.random()*3)+8;
-                velocidadY = (int) (-1*((Math.random()*10)+10));
-                popo = new Proyectil(pajaro.getPosX(),pajaro.getPosY(), velocidadX, velocidadY);
+                //velocidadX = (int) (Math.random()*3)+8;
+                //velocidadY = (int) (-1*((Math.random()*10)+10));
+                popo = new Proyectil(pajaro.getPosX(),pajaro.getPosY(), 0, 0);
                 popo.setPosX(popo.getPosX() + pajaro.getAncho());
                 popo.setPosY(popo.getPosY() + (pajaro.getAlto()/2));
                 
@@ -266,7 +268,7 @@ import java.io.IOException;
                         popo.setConteo(popo.getConteo()+1);
                         popo.setPosX(pajaro.getPosX() + pajaro.getAncho());
                         popo.setPosY(pajaro.getPosY() + (pajaro.getAlto()/2));
-                        popo.setVelocidadY(velocidadY);
+                        choco = true;
                 } 
                 
                 if (colisiono == true && tiempoColision <= 30) {
@@ -277,23 +279,11 @@ import java.io.IOException;
                 }
                 
                 //colision entre paredes
-                if(popo.getVelocidadX()<0){
-                        if (popo.getPosX() + popo.getAncho() < -125 ) {
-                                int posrY = (int) (Math.random() * (getHeight()));
-                                popo.setPosY(posrY);
-                                popo.setPosX(getWidth()+10);
-                                //explosion.play();
-                        }
+                if (popo.getPosY() > getHeight()) {
+                    popo.setPosX(pajaro.getPosX()+pajaro.getAncho());
+                    popo.setPosY(pajaro.getPosY()+pajaro.getAlto()/2);
+                    choco = true;
                 }
-                else{
-                    if ((popo.getPosX() + popo.getAncho()) > getWidth()+30) {
-                            int posrY = (int) (Math.random() * (getHeight()));
-                            popo.setPosX(-5);
-                            popo.setPosY(posrY);
-                            //explosion.play();
-                    }
-                }
-
 	}
         
         public void mouseClicked(MouseEvent e) { }
@@ -314,6 +304,12 @@ import java.io.IOException;
             posClicY = e.getY();
             if(popo.intersecta(posClicX, posClicY)){
                 popo.setMovimiento(true);
+                choco = false;
+                velocidadX = (int) (Math.random()*6)+6;
+                velocidadY = (int) -23;
+
+                popo.setVelocidadX(velocidadX);
+                popo.setVelocidadY(velocidadY);
             }            
         }
 		
@@ -398,6 +394,10 @@ import java.io.IOException;
             
 		if (carro != null && popo != null) {
                         g.drawImage(carro.getImagen(), carro.getPosX(), carro.getPosY(), this);
+                        if(choco){
+                            popo.setMovimiento(false);
+                            choco = false;
+                        }
                         g.drawImage(pajaro.getImagen(), pajaro.getPosX(), pajaro.getPosY(), this);
 			g.drawImage(popo.getImagen(), popo.getPosX(),
                                     popo.getPosY(), this);
