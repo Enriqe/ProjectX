@@ -182,15 +182,13 @@ import java.io.IOException;
                                 }
                                 
                                 if(guardar){
-                                    String nombre = JOptionPane.showInputDialog("Cual es tu nombre?");
-                                    JOptionPane.showMessageDialog(null, 
-                                                  "El puntaje de " + nombre + " es: " + score, "PUNTAJE", 
-                                                  JOptionPane.PLAIN_MESSAGE);
+                                    //guarda pos
                                     try {
-
+                                          
                                           leeArchivo();    //lee el contenido del archivo
                                           //Agrega el contenido del nuevo puntaje al vector.
-                                          vec.add(new Puntaje(nombre,score));
+                                          //guarda posX del carrodel carro, posX y posY y velX y velY popo
+                                          vec.add(new Puntaje( score, carro.getPosX(), popo.getPosX(), popo.getPosY(), popo.getVelocidadX(), popo.getVelocidadY(), vidas));
                                           //Graba el vector en el archivo.
                                           grabaArchivo();
                                     } catch(IOException ex) {
