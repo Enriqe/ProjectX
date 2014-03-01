@@ -109,7 +109,7 @@ import java.io.IOException;
                 pajaro.setPosY(pajaro.getPosY()-(pajaro.getAlto()/2));
 		setBackground (Color.yellow);
                 pausa = false; // iniciliza la pausa como false
-                guardar = true; // guardar inizializa como false
+                guardar = false; // guardar inizializa como false
                 desaparece = false;
 
                 //int posrX = (int) (Math.random() * (getWidth()));    
@@ -175,13 +175,32 @@ import java.io.IOException;
             
                 tiempoActual = System.currentTimeMillis();
                 /*vidas>0 && */ 
-                if(!guardar){
                         while (true) {
                                 if(!pausa){
                                     actualiza();
                                     checaColision();
                                 }
+                                
+                                if(guardar){
+                                    String nombre = JOptionPane.showInputDialog("Cual es tu nombre?");
+                                    JOptionPane.showMessageDialog(null, 
+                                                  "El puntaje de " + nombre + " es: " + score, "PUNTAJE", 
+                                                  JOptionPane.PLAIN_MESSAGE);
+                                    try {
+
+                                          leeArchivo();    //lee el contenido del archivo
+                                          //Agrega el contenido del nuevo puntaje al vector.
+                                          vec.add(new Puntaje(nombre,score));
+                                          //Graba el vector en el archivo.
+                                          grabaArchivo();
+                                    } catch(IOException ex) {
+
+                                          System.out.println("Error en " + ex.toString());
+                                }
+                                }
+                                
                                 repaint();    // Se actualiza el <code>Applet</code> repintando el contenido.
+
                                 try	{
                                         // El thread se duerme.
                                         Thread.sleep (20);
@@ -190,24 +209,7 @@ import java.io.IOException;
                                         System.out.println("Error en " + ex.toString());
                                 }
                         }
-                }
-                else{
-                        String nombre = JOptionPane.showInputDialog("Cual es tu nombre?");
-                        JOptionPane.showMessageDialog(null, 
-                                      "El puntaje de " + nombre + " es: " + score, "PUNTAJE", 
-                                      JOptionPane.PLAIN_MESSAGE);
-                        try {
-
-                              leeArchivo();    //lee el contenido del archivo
-                              //Agrega el contenido del nuevo puntaje al vector.
-                              vec.add(new Puntaje(nombre,score));
-                              //Graba el vector en el archivo.
-                              grabaArchivo();
-                        } catch(IOException ex) {
-
-                              System.out.println("Error en " + ex.toString());
-                        }
-                }
+                
 	}
         
         /**
