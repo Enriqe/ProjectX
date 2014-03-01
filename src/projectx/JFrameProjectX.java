@@ -493,7 +493,7 @@ import java.io.IOException;
             } catch (FileNotFoundException e){
                     File puntos = new File(nombreArchivo);
                     PrintWriter fileOut = new PrintWriter(puntos);
-                    fileOut.println("100,300,400,200,12,9,3");
+                    fileOut.println("100,300,400,200,12,9,3,0,1");
                     fileOut.close();
                     fileIn = new BufferedReader(new FileReader(nombreArchivo));
             }
