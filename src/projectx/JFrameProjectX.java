@@ -188,7 +188,6 @@ import java.io.IOException;
                                 }
                                 
                                 if(guardar){
-                                    //guarda pos
                                     try {
                                           
                                           leeArchivo();    //lee el contenido del archivo
@@ -486,7 +485,11 @@ import java.io.IOException;
             } catch (FileNotFoundException e){
                     File puntos = new File(nombreArchivo);
                     PrintWriter fileOut = new PrintWriter(puntos);
-                    fileOut.println("100,demo");
+                    fileOut.println("100,300,400,200,12,9,3");
+                    /* "" + getPuntaje() + "," + getposXCarro() + ","
+                         + getposXPopo() + "," + getposYPopo() + "," 
+                        + getvelXPopo() + "," + getvelYPopo() + ","
+                        + getVidas();*/
                     fileOut.close();
                     fileIn = new BufferedReader(new FileReader(nombreArchivo));
             }
