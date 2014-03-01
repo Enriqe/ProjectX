@@ -473,9 +473,13 @@ import java.io.IOException;
             while(dato != null) {
                     arr = dato.split(",");
                     int num = (Integer.parseInt(arr[0]));
-                    String nom = arr[1];
-                    vec.add(new Puntaje(nom, num));
-                    //score, carro.getPosX(), popo.getPosX(), popo.getPosY(), popo.getVelocidadX(), popo.getVelocidadY(), vidas)
+                    int pXCarro = (Integer.parseInt(arr[1]));
+                    int pXPopo = (Integer.parseInt(arr[2]));
+                    int pYPopo = (Integer.parseInt(arr[3]));
+                    int vXPopo = (Integer.parseInt(arr[4]));
+                    int vYPopo = (Integer.parseInt(arr[5]));
+                    int vid = (Integer.parseInt(arr[5]));
+                    vec.add(new Puntaje(num, pXCarro, pXPopo, pYPopo, vXPopo, vYPopo, vid));
                     dato = fileIn.readLine();
             }
             fileIn.close();
