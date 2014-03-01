@@ -172,8 +172,10 @@ import java.io.IOException;
      */
 	public void run () {
             	//Guarda el tiempo actual del sistema
-                while( /*vidas>0 && */ guardar == false){
-                        tiempoActual = System.currentTimeMillis();
+            
+                tiempoActual = System.currentTimeMillis();
+                /*vidas>0 && */ 
+                if(!guardar){
                         while (true) {
                                 if(!pausa){
                                     actualiza();
@@ -187,24 +189,24 @@ import java.io.IOException;
                                 catch (InterruptedException ex)	{
                                         System.out.println("Error en " + ex.toString());
                                 }
-                                System.out.print("oooo");
                         }
                 }
-                System.out.println(" lsdjfslf");
-                String nombre = JOptionPane.showInputDialog("Cual es tu nombre?");
-                JOptionPane.showMessageDialog(null, 
-                              "El puntaje de " + nombre + " es: " + score, "PUNTAJE", 
-                              JOptionPane.PLAIN_MESSAGE);
-                try {
+                else{
+                        String nombre = JOptionPane.showInputDialog("Cual es tu nombre?");
+                        JOptionPane.showMessageDialog(null, 
+                                      "El puntaje de " + nombre + " es: " + score, "PUNTAJE", 
+                                      JOptionPane.PLAIN_MESSAGE);
+                        try {
 
-                      leeArchivo();    //lee el contenido del archivo
-                      //Agrega el contenido del nuevo puntaje al vector.
-                      vec.add(new Puntaje(nombre,score));
-                      //Graba el vector en el archivo.
-                      grabaArchivo();
-                } catch(IOException ex) {
+                              leeArchivo();    //lee el contenido del archivo
+                              //Agrega el contenido del nuevo puntaje al vector.
+                              vec.add(new Puntaje(nombre,score));
+                              //Graba el vector en el archivo.
+                              grabaArchivo();
+                        } catch(IOException ex) {
 
-                      System.out.println("Error en " + ex.toString());
+                              System.out.println("Error en " + ex.toString());
+                        }
                 }
 	}
         
@@ -216,13 +218,13 @@ import java.io.IOException;
             
                 switch(direccion){
                    case 3: {
-                           carro.setPosX(carro.getPosX() - 2);
+                           carro.setPosX(carro.getPosX() - 5);
                            //carro.setPosY(carro.getPosY() + 5);
                            break;    //se mueve hacia abajo izquierda
                    }
                    case 4: {
                            //carro.setPosX(carro.getPosX() - 5);
-                           carro.setPosX(carro.getPosX() + 2);
+                           carro.setPosX(carro.getPosX() + 5);
                            break;    //se mueve hacia arriba izquierda	
                    }
                }
@@ -377,7 +379,6 @@ import java.io.IOException;
              * @param e es el <code>evento</code> que se genera en al presionar las teclas.
              */
         public void keyTyped(KeyEvent e){
-
         }
 
         /**
