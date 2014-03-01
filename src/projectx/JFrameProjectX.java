@@ -47,6 +47,7 @@ import java.io.IOException;
  {
         private int posClicX; // posicion del mouse en x
         private int posClicY; // posicion del mouse en y
+        private int aceleracion;
 	private long tiempoActual;
         boolean colisiono;              //flag de que colisiono
         int tiempoColision;             //contador para dejar la imagen colisionada
@@ -59,16 +60,16 @@ import java.io.IOException;
 	private Canasta carro;    // Objeto de la clase Canasta
 	private Proyectil popo;    //Objeto de la clase Proyectil
         private Pajaro pajaro;
-        private LinkedList<Proyectil> lista; // lista para guardar los monitos malos
         private int velocidad;
         boolean pausa;   //booleana para ver si el usuario quiere pausar
         boolean guardar; //booleana para verificar si el usuario quiere guardar
+        private int velocidadX;
+        private int velocidadY;
         boolean desaparece;
         private SoundClip explosion;	//Sonido de explosion
 	private SoundClip beep;	//Sonido de beep
         int score;
         int vidas;
-        private List<Integer> listaNum;
         int numProyectils;
         private Vector vec;    // Objeto vector para agregar el puntaje.
         private String nombreArchivo;    //Nombre del archivo.
@@ -86,6 +87,7 @@ import java.io.IOException;
         
         public void init() {
                 setSize(900, 700);
+                aceleracion = 1;
                 score = 0;
                 vidas = 5;
                 nombreArchivo = "Puntaje.txt";
@@ -102,15 +104,15 @@ import java.io.IOException;
                 pajaro.setPosX(pajaro.getPosX()-(pajaro.getAncho()/2));
                 pajaro.setPosY(pajaro.getPosY()-(pajaro.getAlto()/2));
 		setBackground (Color.yellow);
-                lista = new LinkedList<Proyectil>();  //lista encadenada para guardar malos
                 pausa = false; // iniciliza la pausa como false
                 guardar = false; // guardar inizializa como false
                 desaparece = false;
 
                 //int posrX = (int) (Math.random() * (getWidth()));    
                 int posrY = (int) (Math.random() * (getHeight()));
-                velocidad = (int) (Math.random()*3)+3;
-                popo = new Proyectil(pajaro.getPosX(),pajaro.getPosY(), velocidad);
+                velocidadX = (int) (Math.random()*3)+8;
+                velocidadY = (int) (-1*((Math.random()*10)+10));
+                popo = new Proyectil(pajaro.getPosX(),pajaro.getPosY(), velocidadX, velocidadY);
                 popo.setPosX(popo.getPosX() + pajaro.getAncho());
                 popo.setPosY(popo.getPosY() + (pajaro.getAlto()/2));
                 
@@ -221,10 +223,6 @@ import java.io.IOException;
                    }
                }
 
-               for (Proyectil popo : lista) {
-                   popo.setPosX(popo.getPosX() + popo.getVelocidad());
-               }
-
 
                //Determina el tiempo que ha transcurrido desde que el Applet inicio su ejecución
                long tiempoTranscurrido =
@@ -237,8 +235,11 @@ import java.io.IOException;
                     carro.animBabe.actualiza(tiempoTranscurrido);  //cuando el carro no se mueve, no se anima
                }
                pajaro.animBabe.actualiza(tiempoTranscurrido);
-               for (Proyectil popo : lista) {
-                   popo.animVamp.actualiza(tiempoTranscurrido);
+               popo.animVamp.actualiza(tiempoTranscurrido);
+               if (popo.getMovimiento()){
+                   popo.setPosX(popo.getPosX()+popo.getVelocidadX());
+                   popo.setPosY(popo.getPosY()+popo.getVelocidadY());
+                   popo.setVelocidadY(popo.getVelocidadY()+aceleracion);
                }
             
 	}
@@ -256,28 +257,16 @@ import java.io.IOException;
 			carro.setPosX(getWidth()/2);
 		}
 
-		//Colision entre objetos
-                for (Proyectil popo : lista) {
                     //Colision entre objetos
-                    if( carro.intersecta(popo)) {
-                            colisiono=true;
-                            //beep.play();
-                            desaparece = true;
-                            score++;
-                            popo.setConteo(popo.getConteo()+1);
-                            if(popo.getVelocidad() < 0){
-                                    int posrY = (int) (Math.random() * (getHeight()));
-                                    popo.setPosX(getWidth()+2);
-                                    popo.setPosY(posrY);
-                            }
-                            else{
-                                    int posrY = (int) (Math.random() * (getHeight()));
-                                    popo.setPosX(-2);
-                                    popo.setPosY(posrY);
-                            }
-                            
-                    }
-                    
+                if(carro.intersecta(popo)) {
+                        colisiono=true;
+                        //beep.play();
+                        desaparece = true;
+                        score++;
+                        popo.setConteo(popo.getConteo()+1);
+                        popo.setPosX(pajaro.getPosX() + pajaro.getAncho());
+                        popo.setPosY(pajaro.getPosY() + (pajaro.getAlto()/2));
+                        popo.setVelocidadY(velocidadY);
                 } 
                 
                 if (colisiono == true && tiempoColision <= 30) {
@@ -288,22 +277,20 @@ import java.io.IOException;
                 }
                 
                 //colision entre paredes
-                for (Proyectil popo : lista) {
-                    if(popo.getVelocidad()<0){
-                            if (popo.getPosX() + popo.getAncho() < -125 ) {
-                                    int posrY = (int) (Math.random() * (getHeight()));
-                                    popo.setPosY(posrY);
-                                    popo.setPosX(getWidth()+10);
-                                    //explosion.play();
-                            }
-                    }
-                    else{
-                        if ((popo.getPosX() + popo.getAncho()) > getWidth()+30) {
+                if(popo.getVelocidadX()<0){
+                        if (popo.getPosX() + popo.getAncho() < -125 ) {
                                 int posrY = (int) (Math.random() * (getHeight()));
-                                popo.setPosX(-5);
                                 popo.setPosY(posrY);
+                                popo.setPosX(getWidth()+10);
                                 //explosion.play();
                         }
+                }
+                else{
+                    if ((popo.getPosX() + popo.getAncho()) > getWidth()+30) {
+                            int posrY = (int) (Math.random() * (getHeight()));
+                            popo.setPosX(-5);
+                            popo.setPosY(posrY);
+                            //explosion.play();
                     }
                 }
 
@@ -325,20 +312,9 @@ import java.io.IOException;
                 
             posClicX = e.getX();
             posClicY = e.getY();
-            
-            if(getWidth()/2 > posClicX && getHeight()/2 > posClicY){
-                direccion = 1;
-            }
-            else if(getWidth()/2 < posClicX && getHeight()/2 > posClicY){
-                direccion = 2;
-            }
-            else if(getWidth()/2 > posClicX && getHeight()/2 < posClicY){
-                direccion = 3;
-            }
-            else if(getWidth()/2 < posClicX && getHeight()/2 < posClicY){
-                direccion = 4;
-            }
-            
+            if(popo.intersecta(posClicX, posClicY)){
+                popo.setMovimiento(true);
+            }            
         }
 		
 	/**
@@ -426,9 +402,7 @@ import java.io.IOException;
 			g.drawImage(popo.getImagen(), popo.getPosX(),
                                     popo.getPosY(), this);
                         //pinta los popos en la lista
-                        for (Proyectil popo : lista) {
-                            g.drawImage(popo.getImagen(), popo.getPosX(), popo.getPosY(), this);
-                        }
+                        g.drawImage(popo.getImagen(), popo.getPosX(), popo.getPosY(), this);
                         //score = popo.getConteo();
                         g.drawString("SCORE: " + popo.getConteo(), 20, 40);
                         if(pausa){
